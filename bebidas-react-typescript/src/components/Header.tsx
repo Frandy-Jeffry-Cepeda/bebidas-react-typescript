@@ -4,6 +4,8 @@ import { useAppStore } from "../stores/useAppStore"
 
 export default function Header() {
 
+  const showNotification = useAppStore((state) => state.showNotification)
+
   const [searchFilters, setSearchFilters] = useState({
     ingridient: '',
     category: ''
@@ -32,7 +34,10 @@ export default function Header() {
     e.preventDefault()
 
     if (Object.values(searchFilters).includes('')) {
-
+      showNotification({
+        text: 'Todos los campos son obligatorios',
+        error: true
+      })
       return
     }
 
